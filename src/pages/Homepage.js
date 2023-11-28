@@ -14,7 +14,7 @@ import Signup from "../components/Authentication/Signup";
 
 const Homepage = () => {
   return (
-    <Container mxW="xl" centerContent>
+    <Container maxW="xl" centerContent>
       <Box
         display="flex"
         justifyContent="center"
@@ -44,10 +44,10 @@ const Homepage = () => {
           </TabList>
           <TabPanels>
             <TabPanel>
-              <Login />{" "}
+              <Login />
             </TabPanel>
             <TabPanel>
-              <Signup />{" "}
+              <Signup />
             </TabPanel>
           </TabPanels>
         </Tabs>
