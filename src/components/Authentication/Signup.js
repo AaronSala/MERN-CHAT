@@ -17,7 +17,7 @@ const Signup = () => {
   const [confirmpassword, setConfirmpassword] = useState();
   const [password, setPassword] = useState();
   const [pic, setPic] = useState();
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const toast = useToast();
 
   const handleClick = () => setShow(!show);
@@ -29,19 +29,41 @@ const Signup = () => {
         title: "please select an Image",
         status: "warning",
         duration: 5000,
-        position: "bottom"
+        position: "bottom",
       });
-      return
+      return;
     }
-    if (pics.type === "image/jpeg" || pics.type === image / png) {
-      const data = new FormData()
-      data.append("file, pics")
+    if (pics.type === "image/jpeg" || pics.type === "image" / "png") {
+      const data = new FormData();
+      data.append("file", "pics");
       data.append("upload_preset", "chat-app");
-      data.append("cloud_name", aarons)
-      fetch("")
+      data.append("cloud_name", "aarons");
+      fetch("https://api.cloudinary.com/v1_1/aarons/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setPic(data.url.toString());
+          console.log(data.url.toString());
+          setLoading(false);
+        })
+        .ctach((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    } else {
+      toast({
+        title: "please select an image",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+      return;
     }
-   };
-  
+  };
 
   const submitHandler = () => {};
 
@@ -109,6 +131,7 @@ const Signup = () => {
         width="100%"
         style={{ marginTop: 15 }}
         onClick={submitHandler}
+        isLoading={loading}
       >
         Sign Up
       </Button>
